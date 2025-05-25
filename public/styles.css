@@ -1,0 +1,50 @@
+.box{
+    color: white;
+    margin-top: 50px;
+    margin-left: 75%;
+}
+.name{
+    margin-bottom: 10px;
+}
+.pass{
+    margin-bottom: 5px;
+}
+body {
+  background-image: url("image.jpg"); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh; 
+  margin: 0; 
+}
+p{
+    margin-bottom: 0px;
+}
+.link{
+    color: wheat;
+}
+.issue{
+    color:red;
+}
+.toggle{
+    display: inline;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.6); /* Optional: semi-transparent dark background */
+    color: #ff6b6b;
+    text-align: center;
+    line-height: 40px;
+    font-size: 14px;
+    z-index: 1000; 
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; 
+}

@@ -1,0 +1,10 @@
+$(".toggle").click(()=>{
+    if($("#password").attr("type")==="password"){
+        $("#password").attr("type","text");
+        $(".toggle").text("👁️");
+    }
+    else{
+        $("#password").attr("type","password");
+        $(".toggle").text("🙈");
+    }
+});

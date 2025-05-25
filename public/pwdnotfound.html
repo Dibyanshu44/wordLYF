@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="box">
+        <h1>Log-in</h1>
+        <form action="/login" method="post">  
+            <label class="l">Username:</label>
+            <div class="name"> 
+                <input type="text" name="username" required>
+            </div>
+            <label class="l">Password: </label>
+            <div class="pass">
+                <input type="password" name="password" id="password" required>
+                <div class="toggle">
+                    🙈
+                </div>
+            </div>
+            <input class="l" type="submit">
+        </form>
+        <p class="issue">*Password doesnt match!</p>
+        <p class="l">Don't have an Account?</p>
+        <a class="l link" href="index.html">signup</a>
+    </div>
+    <footer>Made with ❤️ by Dibyanshu Mohanty</footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../index.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
