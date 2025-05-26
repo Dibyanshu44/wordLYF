@@ -49,7 +49,12 @@ app.post("/login",(req,res)=>{
     for(var i=0;i<userlist.length;i++){
         if(req.body.username===userlist[i]){
             if(req.body.password===pwdlist[i]){
-                res.send("welcome "+req.body.username);
+                if(req.body.username==="abhyk_16x"){
+                    res.sendFile(__dirname+"/public/abhay.html")
+                }
+                else{
+                    res.send("welcome "+req.body.username);
+                }
             }
             else{
                 res.sendFile(__dirname+"/public/pwdnotfound.html");
