@@ -1,0 +1,40 @@
+<%- include("partials/header.ejs") %>
+    <div class="container">
+        <div class="box">
+            <form method="post" action="submit">
+                <label>Enter title:</label>
+                <div class="input">
+                    <input type="text" name="title" placeholder="Title goes here" required>
+                </div>
+                <label>enter text:</label>
+                <div class="input">
+                    <textarea class="text" name="text" placeholder="Body goes here" required></textarea>
+                </div>
+                <div class="input">
+                    <input type="submit" value="post">
+                </div>
+            </form>
+        </div>
+        <div class="blog">
+            <% if(data.head.length>0){ %>
+                <% for(var i=data.head.length-1;i>=0;i--){ %>
+                    <% var j=i+1 %>
+                    <div class="test">
+                        <div class="post-header">
+                            <h2><%= data.head[i] %></h2>
+                            <div class="post-actions">
+                            <span class="edit"><a href="/edit/<%= j %>">🖉</a></span>
+                            <span class="dlt" id="<%= j %>"><a href="/dlt/<%= j %>">🗑️</a></span>
+                            </div>
+                        </div>
+                        <p><%= data.body[i] %></p>
+                    </div>
+                <% } %>
+            <% } else{ %>
+                <div class="test">
+                    <h2>No blog posts found.</h2>
+                </div>
+            <% } %>
+        </div>
+    </div>
+<%- include("partials/footer.ejs") %>

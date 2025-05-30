@@ -1,0 +1,21 @@
+    <footer>Made with ❤️ by Dibyanshu Mohanty</footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="../index.js"></script>
+    <script>
+    function toggleDropdown() {
+        const menu = document.getElementById("dropdown-menu");
+        menu.classList.toggle("hidden");
+    }
+
+    // Optional: Hide dropdown if clicked outside
+    document.addEventListener("click", function(event) {
+        const profile = document.querySelector(".profile-container");
+        const dropdown = document.getElementById("dropdown-menu");
+        if (!profile.contains(event.target)) {
+            dropdown.classList.add("hidden");
+        }
+    });
+    </script>
+
+</body>
+</html>

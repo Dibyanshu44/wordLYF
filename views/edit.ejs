@@ -1,0 +1,18 @@
+<%- include("partials/header.ejs") %>
+<div class="container">
+        <div class="box">
+            <form method="post" action="done/<%= data.count %>">
+                <label>Enter title:</label>
+                <div class="input">
+                    <input type="text" name="title" placeholder="Title goes here" value="<%= data.head %>" required>
+                </div>
+                <label>enter text:</label>
+                <div class="input">
+                    <textarea class="text" name="text" placeholder="Body goes here" required><%= data.body %></textarea>
+                </div>
+                <div class="input">
+                    <input type="submit" value="post">
+                </div>
+            </form>
+        </div>
+<%- include("partials/footer.ejs") %>

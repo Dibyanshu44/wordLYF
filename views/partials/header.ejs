@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordLYF</title>
+    <link rel="stylesheet" href="/styles2.css">
+</head>
+<body>
+    <!-- <h1>WordLYF</h1>
+    <img src="/profile.png">
+    <p class="profile"><%= data.name %></p> -->
+    <!-- <header class="top-header">
+        <div class="profile-container">
+            <img src="/profile.png" alt="Profile Picture" class="profile-pic">
+            <p class="profile-name"><%= data.name %></p>
+        </div>
+        <h1 class="site-title">WordLYF</h1>
+    </header> -->
+    <header class="top-header">
+    <div class="profile-container" onclick="toggleDropdown()">
+        <img src="/profile.png" alt="Profile Picture" class="profile-pic">
+        <p class="profile-name"><%= data.name %></p>
+        <div id="dropdown-menu" class="dropdown hidden">
+            <form action="/" method="get">
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
+        </div>
+    </div>
+    <h1 class="site-title">WordLYF</h1>
+</header>
+
