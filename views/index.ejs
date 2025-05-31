@@ -1,40 +1,113 @@
 <%- include("partials/header.ejs") %>
-    <div class="container">
-        <div class="box">
-            <form method="post" action="submit">
-                <label>Enter title:</label>
-                <div class="input">
-                    <input type="text" name="title" placeholder="Title goes here" required>
-                </div>
-                <label>enter text:</label>
-                <div class="input">
-                    <textarea class="text" name="text" placeholder="Body goes here" required></textarea>
-                </div>
-                <div class="input">
-                    <input type="submit" value="post">
-                </div>
-            </form>
+
+<div class="container">
+  <div class="box">
+    <form method="post" action="submit">
+      <label>Enter title:</label>
+      <div class="input">
+        <input type="text" name="title" placeholder="Title goes here" required />
+      </div>
+      <label>enter text:</label>
+      <div class="input">
+        <textarea class="text" name="text" placeholder="Body goes here" required></textarea>
+      </div>
+      <div class="input">
+        <input type="submit" value="post" />
+      </div>
+    </form>
+  </div>
+  <div class="blog" id="blog">
+    <% if(data.head.length>0){ %>
+      <% for(var i=data.head.length-1;i>=0;i--){ %>
+        <% var j=i+1 %>
+        <div class="test" data-id="<%= j %>">
+          <div class="post-header">
+            <h2><%= data.head[i] %></h2>
+            <div class="post-actions">
+              <span class="edit"><a href="/edit/<%= j %>">✏️</a></span>
+              <span class="dlt" id="<%= j %>"><a href="/dlt/<%= j %>">🗑️</a></span>
+            </div>
+          </div>
+          <p><%= data.body[i] %></p>
         </div>
-        <div class="blog">
-            <% if(data.head.length>0){ %>
-                <% for(var i=data.head.length-1;i>=0;i--){ %>
-                    <% var j=i+1 %>
-                    <div class="test">
-                        <div class="post-header">
-                            <h2><%= data.head[i] %></h2>
-                            <div class="post-actions">
-                            <span class="edit"><a href="/edit/<%= j %>">✏️</a></span>
-                            <span class="dlt" id="<%= j %>"><a href="/dlt/<%= j %>">🗑️</a></span>
-                            </div>
-                        </div>
-                        <p><%= data.body[i] %></p>
-                    </div>
-                <% } %>
-            <% } else{ %>
-                <div class="test">
-                    <h2>No blog posts found.</h2>
-                </div>
-            <% } %>
-        </div>
-    </div>
+      <% } %>
+    <% } else { %>
+      <div class="test">
+        <h2>No blog posts found.</h2>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  const blogContainer = document.getElementById("blog");
+
+  socket.on("new-post", function (post) {
+    const postDiv = document.createElement("div");
+    postDiv.className = "test";
+    postDiv.setAttribute("data-id", post.id);
+
+    const postHeader = document.createElement("div");
+    postHeader.className = "post-header";
+
+    const h2 = document.createElement("h2");
+    h2.textContent = post.title;
+
+    const postActions = document.createElement("div");
+    postActions.className = "post-actions";
+
+    const editSpan = document.createElement("span");
+    editSpan.className = "edit";
+    const editLink = document.createElement("a");
+    editLink.href = "/edit/" + post.id;
+    editLink.textContent = "✏️";
+    editSpan.appendChild(editLink);
+
+    const dltSpan = document.createElement("span");
+    dltSpan.className = "dlt";
+    dltSpan.id = post.id;
+    const dltLink = document.createElement("a");
+    dltLink.href = "/dlt/" + post.id;
+    dltLink.textContent = "🗑️";
+    dltSpan.appendChild(dltLink);
+
+    postActions.appendChild(editSpan);
+    postActions.appendChild(dltSpan);
+
+    postHeader.appendChild(h2);
+    postHeader.appendChild(postActions);
+
+    const p = document.createElement("p");
+    p.textContent = post.text;
+
+    postDiv.appendChild(postHeader);
+    postDiv.appendChild(p);
+
+    blogContainer.insertBefore(postDiv, blogContainer.firstChild);
+  });
+
+  socket.on("delete-post", function (id) {
+    const postDiv = blogContainer.querySelector(`.test[data-id='${id}']`);
+    if (postDiv) {
+      postDiv.remove();
+    }
+  });
+
+  socket.on("edit-post", function (post) {
+    const postDiv = blogContainer.querySelector(`.test[data-id='${post.id}']`);
+    if (postDiv) {
+      const h2 = postDiv.querySelector("h2");
+      h2.textContent = post.title;
+      const p = postDiv.querySelector("p");
+      p.textContent = post.text;
+      const editLink = postDiv.querySelector(".edit a");
+      editLink.href = "/edit/" + post.id;
+      const dltLink = postDiv.querySelector(".dlt a");
+      dltLink.href = "/dlt/" + post.id;
+    }
+  });
+</script>
+
 <%- include("partials/footer.ejs") %>
